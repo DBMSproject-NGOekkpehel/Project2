@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html> <!--<![endif]-->
+
+<% include head.ejs %>
+
+<%# /*<style>
+span.error{
+  color: red;
+}
+</style>*/%>
+
+<body id="body" ng-app="">
+  <% include nav_bar.ejs %>
+  <!-- Contact Form -->
+  <div class="item active" style="background-image: url(img/banner1.jpeg);">
+    <div class="container">
+
+      <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+
+        <div class="c-form-top">
+          <div class="c-form-top-left">
+            <h3 data-wow-duration="1000ms" ><span class="color"><b>Add New Member</b></span> </h3>
+            <p>________________________________________</p>
+
+          </div>
+        </div>
+        <div class="c-form-bottom" ng-controller="formCtrl">
+          <form role="form"  method="post" action="/new_member_data" name="newMemberForm" ng-model="newMemberForm">
+            <div class="form-group">
+              <label for="memberName">
+                <span class="label-text" style="color:white">Name:</span>
+              </label>
+              <input type="text" placeholder="Member's name..." ng-model="memberName" required>
+              <%# <span ng-show="newMemberForm.memberName.$invalid" class="error">Enter a valid name {{newMemberForm.memberName.$invalid}}</span>%>
+              <h1>Hello {{memberName}}</h1>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary btn-md" style="color:white">SUBMIT</button>
+          </form>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Javascript -->
+  <%# <script src="public/js/jquery-1.11.1.min.js"></script>%>
+  <%# <script src="public/js/bootstrap.min.js"></script>%>
+  <%# <script src="public/js/jquery.backstretch.min.js"></script>%>
+  <%# <script src="public/js/wow.min.js"></script>%>
+  <%# <script src="public/js/scripts.js"></script>%>
+
+  <!--[if lt IE 10]>
+  <script src="assets/js/placeholder.js"></script>
+  <![endif]-->
+
+</body>
+</html>

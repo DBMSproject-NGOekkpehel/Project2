@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include ../head.ejs %>
+
+<style>
+  input.ng-invalid{
+    border: 3px solid red;
+  }
+  span.contact-error{
+    color: red;
+    font-weight: bold;
+  }
+</style>
+
+<body id="body" style="background-image: url(images/banner1.jpeg);">
+  <% include ../nav_bar.ejs %>
+    <!-- Contact Form -->
+    <div class="item active" >
+      <div class="container">
+        <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+          <div class="c-form-top">
+            <div class="c-form-top-left">
+
+            </div>
+          </div>
+          <div >
+            <h3 data-wow-duration="1000ms"> <span class="color"> <b>Remove Member</b> </span> </h3>
+              <p>________________________________________</p>
+              <p>                                       .</p>
+            </div>
+          <div class="c-form-bottom" ng-app>
+
+            <form role="form" action="/member/remove" id="contact-form" method="post" name="contactForm">
+              <div class="form-group" >
+
+                <label for="c-form-name">
+
+                  <span class="label-text" style="color:white">NAME:</span>
+                </label>
+                <input type="text" name="member_name" placeholder="Member's name..." class="c-form-subject form-control" required ng-model="name">
+                <span class="contact-error" ng-show="contactForm.member_name.$invalid && contactForm.member_name.$touched">Give a name to check the database...</span>
+              </div>
+
+              <div class="form-group">
+                <label for="c-form-EmailId">
+                  <span class="label-text" style="color:white">EMAIL ID:</span>
+
+                </label>
+                <input type="email" name="EmailId" placeholder="Members Email address..." class="c-form-subject form-control" required ng-model="emailID">
+                <span class="contact-error" ng-show="contactForm.EmailId.$invalid && contactForm.EmailId.$touched">Email is required</span>
+              </div>
+
+              <button ng-show="contactForm.$valid" type="submit" class="btn btn-primary btn-md" style="color:white" action="">Remove</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Javascript -->
+  <script src="javascripts/jquery-1.11.1.min.js"></script>
+  <script src="javascripts/bootstrap.min.js"></script>
+  <%# <script src="javascripts/jquery.backstretch.min.js"></script>%>
+  <script src="javascripts/wow.min.js"></script>
+  <script src="javascripts/angular.min.js"></script>
+  <%# <!-- Contact form validation -->
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>%>
+  <%# <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>%>
+  <%# <script src="public/js/scripts.js"></script>%>
+
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+  <script>
+    // $("#contact-form").validate();
+    // $(function() {
+    //
+    //   $("#contact-form").validate({
+    //
+    //     rules:{
+    //       member_name: {
+    //         required: true,
+    //         minlength: 2
+    //       }
+    //       EmailId: {
+    //         email: true,
+    //         required: true,
+    //         minlength: 3
+    //       }
+    //     }
+    //
+    //     messages: {
+    //       member_name: {
+    //         required: "Please enter a name",
+    //         minlength: "Make it longer..."
+    //       }
+    //       EmailId: {
+    //         email: "It has to be an email address"
+    //         required: "Can't look for you in the database without this"
+    //         minlength: "Not so short..."
+    //       }
+    //     }
+    //   });
+    // });
+  </script>
+</body>
+</html>

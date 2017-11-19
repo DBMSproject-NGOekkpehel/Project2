@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include head.ejs %>
+
+<body id="body" ng-app="assignManager" style="background-image: url(img/banner1.jpeg);">
+  <% include nav_bar.ejs %>
+
+  <section id="assign_manager" class="works clearfix" ng-controller="populateDepartments">
+    <div class="container">
+<h3 data-wow-duration="1000ms" ><span class="color"><b>Assign Manager</b></span> </h3>
+  <form action="/assign-manager" method="post">
+      <table class="table table-bordered">
+        <thead>
+          <th style="color:white">Department</th>
+          <th style="color:white">Manager name</th>
+          <th style="color:white">Manager SSN</th>
+        </thead>
+        <tbody>
+        <%# <option ng-repeat="x in departments">{{x.dname}}</option>%>
+        <% for (di in departments) {
+            var dept_manager_flag = false;%>
+          <tr>
+            <td style="color:white">
+              <%=departments[di].dname%>
+            </td>
+              <% for (mi in managers){
+                  if(managers[mi].dno === departments[di].dno && managers[mi].mname != ""){
+                    dept_manager_flag = true;%>
+                    <td>
+                    <input type="text" name="<%= departments[di].dname %>" value="<%= managers[mi].mname %>">
+                    </td>
+                    <td>
+                    <label style="color: white"><%= managers[mi].ssn %></label>
+                    </td>
+                  <%}
+                }
+                if(dept_manager_flag==false){ %>
+                  <td>
+                  <input type="text" name="<%= departments[di].dname %>" >
+                  </td>
+                  <td>
+                  </td>
+                <%}%>
+          </tr>
+        <% } %>
+      </tbody>
+      </table>
+      <%# <input type="submit" value="submit"  />%>
+      <button type="submit" class="btn btn-primary btn-md" style="margin-left:540px";>SUBMIT</button>
+    </form>
+
+    </div>
+  </section>
+
+  <%# <script>
+
+  var app = angular.module('assignManager', []);
+  app.controller('populateDepartments', function ($scope, $http){
+    $http.post("/get_departments")
+    .then(function (response) {
+      $scope.departments = response.data;
+      console.log("Departments:");
+      console.log($scope.departments);
+    });
+  });
+  </script>%>
+</body>

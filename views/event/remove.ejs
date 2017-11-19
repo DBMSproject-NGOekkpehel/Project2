@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include head.ejs %>
+
+<body id="body" style="background-image: url(img/banner1.jpeg);">
+  <% include nav_bar.ejs %>
+    <!-- Contact Form -->
+    <div class="item active" >
+      <div class="container">
+        <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+          <div class="c-form-top">
+            <div class="c-form-top-left">
+              
+            </div>
+          </div>
+          <div >
+            <h3 data-wow-duration="1000ms"> <span class="color"> <b>Remove Event</b> </span> </h3>
+              <p>________________________________________</p>
+              <p>                                       .</p>
+            </div>
+          <div class="c-form-bottom">
+
+            <form role="form"  method="post" action="/new_member_data">
+              <div class="form-group">
+
+                <label for="c-form-event_id">
+
+                  <span class="label-text" style="color:white">EventId:</span>
+                    <span class="contact-error"></span>
+                </label>
+                <input type="integer" name="event_id" placeholder="event id..." class="c-form-name form-control" id="c-form-event_id">
+              </div>
+                          
+              <div class="form-group">
+                <label for="c-form-event_name">
+                  <span class="label-text" style="color:white">Event Name:</span>
+                    <span class="contact-error"></span>
+                </label>
+                <input type="text" name="event_name" placeholder="name of event"..." class="c-form-subject form-control" id="c-form-event_name">
+              </div>
+                            
+              <button type="submit" class="btn btn-primary btn-md" style="color:white" action="">Remove Event</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Javascript -->
+  <script src="public/js/jquery-1.11.1.min.js"></script>
+    <script src="public/js/bootstrap.min.js"></script>
+      <script src="public/js/jquery.backstretch.min.js"></script>
+        <script src="public/js/wow.min.js"></script>
+          <%# <script src="public/js/scripts.js"></script>%>
+
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+</body>
+</html>

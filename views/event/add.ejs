@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include head.ejs %>
+
+<body id="body">
+  <% include nav_bar.ejs %>
+    <!-- Contact Form -->
+    <div class="item active" style="background-image: url(img/banner1.jpeg);">
+          <div class="container">
+
+                <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+
+                      <div class="c-form-top">
+                        <div class="c-form-top-left">
+                          <h3 data-wow-duration="1000ms" ><span class="color"><b>Add New Event</b></span> </h3>
+                <p>________________________________________</p>
+
+                        </div>
+                      </div>
+                      <div class="c-form-bottom">
+                        <form role="form"  method="post" action="/add_event_data">
+                          <div class="form-group">
+                            <label for="c-form-event_id">
+                              <span class="label-text" style="color:white">Event Id:</span>
+                              <span class="contact-error"></span>
+                            </label>
+                            <input type="integer" name="event_id" placeholder="event id..." class="c-form-name form-control" id="c-form-event_id">
+                          </div>
+                          <div class="form-group">
+                            <label for="c-form-location">
+                              <span class="label-text" style="color:white">Location:</span>
+                              <span class="contact-error"></span>
+                            </label>
+                              <input type="text" name="location" placeholder="location of event..." class="c-form-email form-control" id="c-form-location">
+                            </div>
+                            <div class="form-group">
+                              <label for="c-form-budget">
+                              <span class="label-text" style="color:white">Budget:</span>
+                              <span class="contact-error"></span>
+                              </label>
+                              <input type="integer" name="budget" placeholder="budget of the event..." class="c-form-subject form-control" id="c-form-budget">
+                            </div>
+                            <div class="form-group">
+                              <label for="c-form-event_name">
+                              <span class="label-text" style="color:white">Event Name:</span>
+                              <span class="contact-error"></span>
+                              </label>
+                              <input type="text" name="event_name" placeholder="event's name..." class="c-form-subject form-control" id="c-form-event_name">
+                            </div>
+                            <div class="form-group">
+                              <label for="c-form-supssn">
+                              <span class="label-text" style="color:white">Supervisor SSN:</span>
+                              <span class="contact-error"></span>
+                              </label>
+                              <input type="integer" name="supssn" placeholder="supervisor's ssn..." class="c-form-subject form-control" id="c-form-supssn">
+                            </div>
+                            <div class="form-group">
+                              <label for="c-form-date_time">
+                              <span class="label-text" style="color:white">Date and Time:</span>
+                              <span class="contact-error"></span>
+                              </label>
+                              <input type="date-time" name="date_time" placeholder="date and time of event..." class="c-form-subject form-control" id="c-form-date_time">
+                            </div>
+                            <div class="form-group">
+                              <label for="c-form-receipt_no">
+                                <span class="label-text" style="color:white">Recipt_No:</span>
+                                <span class="contact-error"></span>
+                              </label>
+                              <input type="integer" name="receipt_no" placeholder="receipt number..." class="c-form-subject form-control" id="c-form-receipt_no">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-md" style="color:white">Add Event</button>
+                        </form>
+                      </div>
+
+
+              </div>
+
+          </div>
+        </div>
+
+
+        <!-- Javascript -->
+        <script src="public/js/jquery-1.11.1.min.js"></script>
+        <script src="public/js/bootstrap.min.js"></script>
+        <script src="public/js/jquery.backstretch.min.js"></script>
+        <script src="public/js/wow.min.js"></script>
+        <%# <script src="public/js/scripts.js"></script>%>
+
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+    </body>
+</html>

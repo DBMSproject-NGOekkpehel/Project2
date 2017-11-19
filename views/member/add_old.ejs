@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include ../head.ejs %>
+
+<style>
+span.error{
+  color: red;
+}
+</style>
+
+<body id="body">
+  <% include ../nav_bar.ejs %>
+  <!-- Contact Form -->
+  <div class="item active" style="background-image: url(images/banner1.jpeg);">
+    <div class="container">
+
+      <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+
+        <div class="c-form-top">
+          <div class="c-form-top-left">
+            <h3 data-wow-duration="1000ms" ><span class="color"><b>Add New Member</b></span> </h3>
+            <p>________________________________________</p>
+
+          </div>
+        </div>
+        <div class="c-form-bottom">
+          <form role="form"  method="post" action="/member/data">
+            <div class="form-group">
+              <label for="c-form-name">
+                <span class="label-text" style="color:white">Name:</span>
+                <% if(errors){ %>
+                  <% if (errors.member_name) { %>
+                    <span class="contact-error">* <%= errors.member_name.msg %></span>
+                    <% }
+                  }%>
+                </label>
+                <input type="text" name="member_name" placeholder="Member's name..." ng-model="member_name">
+              </div>
+              <div class="form-group">
+                <label for="c-form-joiningDate">
+                  <span class="label-text" style="color:white">Joining Date:</span>
+                  <% if(errors){ %>
+                    <% if (errors.joiningDate) { %>
+                      <span class="contact-error">* <%= errors.joiningDate.msg %></span>
+                      <% }}%>
+                    </label>
+                    <input type="date" name="joiningDate" placeholder="Member's date of joining..." class="c-form-email form-control" id="c-form-joiningDate">
+                  </div>
+                  <div class="form-group">
+                    <label for="c-form-dname">
+                      <span class="label-text" style="color:white">Department Name:</span>
+                      <% if(errors){ %>
+                        <% if (errors.dname) { %>
+                          <span class="contact-error">* <%= errors.dname.msg %></span>
+                          <% }}%>
+                        </label>
+                        <input type="integer" name="dname" placeholder="Member's department name..." class="c-form-subject form-control" id="c-form-dname">
+                      </div>
+                      <div class="form-group">
+                        <label for="c-form-PhoneNo">
+                          <span class="label-text" style="color:white">Phone Number:</span>
+                          <% if(errors){ %>
+                            <% if (errors.PhoneNo) { %>
+                              <span class="contact-error">* <%= errors.PhoneNo.msg %></span>
+                              <% }}%>
+                            </label>
+                            <input type="longinteger" name="PhoneNo" placeholder="Member's Phone number..." class="c-form-subject form-control" id="c-form-PhoneNo" >
+                          </div>
+                          <div class="form-group">
+                            <label for="c-form-EmailId">
+                              <span class="label-text" style="color:white">EmailID:</span>
+                              <% if(errors){ %>
+                                <% if (errors.EmailId) { %>
+                                  <span class="contact-error">* <%= errors.EmailId.msg %></span>
+                                  <% }}%>
+                                </label>
+                                <input type="text" name="EmailId" placeholder="Members Email address..." class="c-form-subject form-control" id="c-form-EmailID">
+                              </div>
+                              <div class="form-group">
+                                <label for="c-form-dob">
+                                  <span class="label-text" style="color:white">Date Of Birth:</span>
+                                  <% if(errors){ %>
+                                    <% if (errors.dob) { %>
+                                      <span class="contact-error">* <%= errors.dob.msg %></span>
+                                      <% }}%>
+                                    </label>
+                                    <input type="date" name="dob" placeholder="Member's Date of Birth..." class="c-form-subject form-control" id="c-form-dob">
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="c-form-fatherName">
+                                      <span class="label-text" style="color:white">Father's Name:</span>
+                                      <% if(errors){ %>
+                                        <% if (errors.fatherName) { %>
+                                          <span class="contact-error">* <%= errors.fatherName.msg %></span>
+                                          <% }}%>
+                                        </label>
+                                        <input type="text" name="fatherName" placeholder="member's father's Name..." class="c-form-subject form-control" id="c-form-fatherName">
+                                      </div>
+
+                                      <div class="form-group">
+                                        <label for="c-form-corrAddr">
+                                          <span class="label-text" style="color:white">Corresponding Address:</span><% if(errors){ %>
+                                            <% if (errors.corrAddr) { %>
+                                              <span class="contact-error">* <%= errors.corrAddr.msg %></span>
+                                              <% }}%>
+                                            </label>
+                                            <input type="text" name="corrAddr" placeholder="member's corresponding Address..." class="c-form-subject form-control" id="c-form-corrAddr">
+                                          </div>
+
+                                          <div class="form-group">
+                                            <label for="c-form-permAddr">
+                                              <span class="label-text" style="color:white">Permanent Address:</span>
+                                              <% if(errors){ %>
+                                                <% if (errors.permAddr) { %>
+                                                  <span class="contact-error">* <%= errors.permAddr.msg %></span>
+                                                  <% }}%>
+                                                </label>
+                                                <input type="text" name="permAddr" placeholder="member's Permanent Address..." class="c-form-subject form-control" id="c-form-permAddr">
+                                              </div>
+
+                                              <div class="form-group">
+                                                <label for="c-form-gender">
+                                                  <span class="label-text" style="color:white">Gender:</span>
+                                                  <% if(errors){ %>
+                                                    <% if (errors.gender) { %>
+                                                      <span class="contact-error">* <%= errors.gender.msg %></span>
+                                                      <% }}%>
+                                                    </label>
+                                                    <input type="text" name="gender" placeholder="member's gender..." class="c-form-subject form-control" id="c-form-gender">
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                    <label for="c-form-collegeName">
+                                                      <span class="label-text" style="color:white">College:</span>
+                                                      <% if(errors){ %>
+                                                        <% if (errors.collegeName) { %>
+                                                          <span class="contact-error">* <%= errors.collegeName.msg %></span>
+                                                          <% }}%>
+                                                        </label>
+                                                        <input type="text" name="collegeName" placeholder="member's College Name..." class="c-form-subject form-control" id="c-form-collegeName">
+                                                      </div>
+
+                                                      <button type="submit" class="btn btn-primary btn-md" style="color:white">SUBMIT</button>
+                                                    </form>
+                                                  </div>
+
+
+                                                </div>
+
+                                              </div>
+                                            </div>
+
+
+                                            <!-- Javascript -->
+                                            <script src="javascripts/jquery-1.11.1.min.js"></script>
+                                            <script src="javascripts/bootstrap.min.js"></script>
+                                            <script src="javascripts/jquery.backstretch.min.js"></script>
+                                            <script src="javascripts/wow.min.js"></script>
+                                            <%# <script src="public/js/scripts.js"></script>%>
+
+                                            <!--[if lt IE 10]>
+                                            <script src="assets/js/placeholder.js"></script>
+                                            <![endif]-->
+
+                                          </body>
+                                          </html>
