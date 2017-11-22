@@ -88,11 +88,12 @@ router.post('/data',[
     + ',' + "'" + req.body.gender + "'"
     + ',' + "'" + req.body.collegeName + "'"
     console.log(req.body);
+    console.log('Date:' + req.body.dob);
 
     con.query('call insertNewMember (' + new_member_data + ');', function(err, result, fields) {
       if (err) {
         // Testing to send and handle errors in inserting the data
-        console.log('SQL Error');
+        console.log(err);
         // res.render('new_member', {data: req.body, errors: });
       }
       else {

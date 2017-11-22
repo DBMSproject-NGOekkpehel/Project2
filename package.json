@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "angular-datepicker": "^1.0.5",
     "angularjs-datepicker": "^2.1.23",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
