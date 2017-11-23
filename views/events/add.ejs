@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include ../head.ejs %>
+
+<style>
+span.contact-error{
+  color: red;
+  font-weight: bold;
+}
+</style>
+
+<body id="body">
+  <% include ../nav_bar.ejs %>
+  <!-- Contact Form -->
+  <div class="item active" style="background-image: url(/images/banner1.jpeg);">
+    <div class="container">
+
+      <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+
+        <div class="c-form-top">
+          <div class="c-form-top-left">
+            <h3 data-wow-duration="1000ms" ><span class="color"><b>Add New Event</b></span> </h3>
+            <p>________________________________________</p>
+
+          </div>
+        </div>
+        <div class="c-form-bottom" ng-app>
+          <form role="form"  method="post" action="/events/add" name="addEventForm">
+            <%# <div class="form-group">
+              <label for="c-form-event_id">
+                <span class="label-text" style="color:white">Event Id:</span>
+                <span class="contact-error"></span>
+              </label>
+              <input type="integer" name="event_id" placeholder="event id..." class="c-form-name form-control" required ng-model="event_id">
+            </div>%>
+            <div class="form-group">
+              <label for="c-form-location">
+                <span class="label-text" style="color:white">Location:</span>
+              </label>
+              <input type="text" name="location" placeholder="location of event..." class="c-form-subject form-control" required ng-model="location">
+              <span class="contact-error" ng-show="addEventForm.location.$invalid && addEventForm.location.$touched">Where is it?</span>
+            </div>
+            <div class="form-group">
+              <label for="c-form-budget">
+                <span class="label-text" style="color:white">Budget:</span>
+              </label>
+              <input type="integer" name="budget" placeholder="budget of the event..." class="c-form-subject form-control" required ng-model="budget">
+              <span class="contact-error" ng-show="addEventForm.budget.$invalid && addEventForm.budget.$touched">Free event??</span>
+            </div>
+            <div class="form-group">
+              <label for="c-form-event_name">
+                <span class="label-text" style="color:white">Event Name:</span>
+              </label>
+              <input type="text" name="event_name" placeholder="event's name..." class="c-form-subject form-control" requred ng-model="eventName">
+              <span class="contact-error" ng-show="addEventForm.eventName.$invalid && addEventForm.eventName.$touched">Give the event a name</span>
+            </div>
+            <div class="form-group">
+              <label for="c-form-supssn">
+                <span class="label-text" style="color:white">Supervisor SSN:</span>
+                <span class="contact-error"></span>
+              </label>
+              <input type="integer" name="supssn" placeholder="supervisor's ssn..." class="c-form-subject form-control" required ng-model="supervisor">
+              <span class="contact-error" ng-show="addEventForm.supervisor.$invalid && addEventForm.supervisor.$touched">Not a supervised event??</span>
+            </div>
+            <div class="form-group">
+              <label for="c-form-date_time">
+                <span class="label-text" style="color:white">Date and Time:</span>
+                <span class="contact-error"></span>
+              </label>
+              <input type="date" name="date_time" placeholder="date and time of event..." class="c-form-subject form-control" required ng-model="dateNTime">
+              <span class="contact-error" ng-show="addEventForm.dateNTime.$invalid && addEventForm.dateNTime.$touched">When is the event??</span>
+            </div>
+            <div class="form-group">
+              <label for="c-form-receipt_no">
+                <span class="label-text" style="color:white">Recipt_No:</span>
+                <span class="contact-error"></span>
+              </label>
+              <input type="integer" name="receipt_no" placeholder="receipt number..." class="c-form-subject form-control" required ng-model="receipt">
+              <span class="contact-error" ng-show="addEventForm.receipt.$invalid && addEventForm.receipt.$touched">No receipt of the project??</span>
+            </div>
+
+            <button ng-show="addEventForm.$valid" type="submit" class="btn btn-primary btn-md" style="color:white">Add Event</button>
+          </form>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Javascript -->
+  <script src="/javascripts/jquery-1.11.1.min.js"></script>
+  <script src="/javascripts/bootstrap.min.js"></script>
+  <script src="/javascripts/jquery.backstretch.min.js"></script>
+  <script src="/javascripts/wow.min.js"></script>
+  <script src="/javascripts/angular.js"></script>
+
+  <%# <script src="public/js/scripts.js"></script>%>
+
+  <!--[if lt IE 10]>
+  <script src="assets/js/placeholder.js"></script>
+  <![endif]-->
+
+</body>
+</html>

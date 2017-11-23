@@ -115,4 +115,10 @@ router.post('/remove', (req, res) => {
   })
 });
 
+router.get('/view', (req, res) => {
+  con.query('SELECT * FROM Members m, Department d WHERE m.dno=d.dno;', (err, rows, fields) => {
+    res.render('member/view', {members: rows});
+  });
+});
+
 module.exports = router;

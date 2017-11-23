@@ -40,18 +40,9 @@ var con2 = mysql2.createConnection({
   database: "ekkPahel"
 });
 
-// // tell node where to look for site resources
-// router.use(express.static(__dirname + '/public'));
-// // router.use(express.static(__dirname + '/font'));
-//
-// // tell node and configure express to read post data
-// router.use(bodyParser.urlencoded({encoded: true}));
-//
-// router.set('view engine', 'ejs');
-
 router.get('/assign-manager', (req, res) => {
 
-  /*con.query('SELECT d.dno, m.mname, m.ssn FROM Department d, Members m WHERE mgrssn=ssn;', (err, result, field) => {
+  con.query('SELECT d.dno, m.mname, m.ssn FROM Department d, Members m WHERE mgrssn=ssn;', (err, result, field) => {
     if (err) throw err;
     else {
       // console.log(JSON.stringify(result));
@@ -60,7 +51,7 @@ router.get('/assign-manager', (req, res) => {
         if (err) throw err;
         else {
           var departments = result;
-          res.render('assign_manager', {departments: departments, managers: managed_departments});
+          res.render('department/assign_manager', {departments: departments, managers: managed_departments});
           console.log("Department:");
           console.log(JSON.stringify(departments));
           console.log("Managers:");
@@ -68,17 +59,35 @@ router.get('/assign-manager', (req, res) => {
         }
       });
     }
-  });*/
-
-  var [err, managed_departments] = con2.query('SELECT d.dno, m.mname, m.ssn FROM Department d, Members m WHERE mgrssn=ssn;');
-  if (err) throw err;
-  var [err, departments] = con2.query('SELECT * FROM Department;');
-  if (err) throw err;
-  res.render('assign_manager', {departments: departments, managers: managed_departments});
-  console.log("Department:");
-  console.log(JSON.stringify(departments));
-  console.log("Managers:");
-  console.log(JSON.stringify(managed_departments));
+  });
 });
 
-module.exports = router;
+router.post('/assign-manager', (req, res) => {
+
+  var values = req.body;
+  for (var dname in values) {
+    if (values.hasOwnProperty(dname))
+    con2.execute('UPDATE Department SET mgrssn=(SELECT ssn FROM Members WHERE mname LIKE ?) WHERE dname=?;',[values[dname], dname], (err, rows, fields)=>{});
+  }
+
+  res.redirect('/');
+});
+
+router.get('/view',(req, res)=> {
+  con.query('SELECT d.dno, m.mname, m.ssn FROM Department d, Members m WHERE mgrssn=ssn;', (err, result, field) => {
+    if (err) throw err;
+    else {
+      // console.log(JSON.stringify(result));
+      var managed_departments = result;
+      con.query('SELECT * FROM Department;', (err, result, field) => {
+        if (err) throw err;
+        else {
+          var departments = result;
+          res.render('department/view', {departments: departments, managers: managed_departments});
+        }
+      });
+    }
+  });
+});
+
+  module.exports = router;

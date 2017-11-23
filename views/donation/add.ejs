@@ -4,83 +4,86 @@
 <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 
-<% include head.ejs %>
+<% include ../head.ejs %>
 
-<body id="body" style="background-image: url(img/banner1.jpeg);">
-  <% include nav_bar.ejs %>
-    <!-- Contact Form -->
-    <div class="item active" >
-          <div class="container">
+<style>
+span.contact-error{
+  color: red;
+  font-weight: bold;
+}
+</style>
 
-                <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+<body id="body" style="background-image: url(/images/banner1.jpeg);">
+  <% include ../nav_bar.ejs %>
+  <!-- Contact Form -->
+  <div class="item active" >
+    <div class="container">
 
-                      <div class="c-form-top">
-                        <div class="c-form-top-left">
-                          <h3 data-wow-duration="1000ms" ><span class="color"><b>Add New Donation</b></span> </h3>
-                <p>________________________________________</p>
+      <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
 
-                        </div>
-                      </div>
-                      <div class="c-form-bottom">
-                        <form role="form"  method="post" action="/add_donation_data">
-                          <div class="form-group">
-                            <label for="c-form-name">
-                              <span class="label-text" style="color:white">Donor Name:</span>
-                              <span class="contact-error"></span>
-                            </label>
-                            <input type="text" name="donor_name" placeholder="Donor's name..." class="c-form-donor_name form-control" id="c-form-donor_name">
-                          </div>
-                          <div class="form-group">
-                            <label for="c-form-amount">
-                              <span class="label-text" style="color:white">Amount:</span>
-                              <span class="contact-error"></span>
-                            </label>
-                              <input type="integer" name="amount" placeholder="Donation amount..." class="c-form-amount form-control" id="c-form-amount">
-                            </div>
-                            <div class="form-group">
-                              <label for="c-form-trans_date">
-                              <span class="label-text" style="color:white">Transaction Date:</span>
-                              <span class="contact-error"></span>
-                              </label>
-                              <input type="date" name="trans_date" placeholder="date of Transaction..." class="c-form-subject form-control" id="c-form-trans_date">
-                            </div>
-                            <div class="form-group">
-                              <label for="c-form-receipt_no">
-                              <span class="label-text" style="color:white">Receipt Number:</span>
-                              <span class="contact-error"></span>
-                              </label>
-                              <input type="integer" name="receipt_no" placeholder="Receipt number..." class="c-form-subject form-control" id="c-form-receipt_no">
-                            </div>
-                            <div class="form-group">
-                              <label for="c-form-type">
-                              <span class="label-text" style="color:white">Donation Type:</span>
-                              <span class="contact-error"></span>
-                              </label>
-                              <input type="text" name="type" placeholder="type of donation(eg.cash,clothes etc)..." class="c-form-subject form-control" id="c-form-type">
-                            </div>
-                            
-
-                            <button type="submit" class="btn btn-primary btn-md" style="color:white">Add Donation</button>
-                        </form>
-                      </div>
-
-
-              </div>
+        <div class="c-form-top">
+          <div class="c-form-top-left">
+            <h3 data-wow-duration="1000ms" ><span class="color"><b>Add New Donation</b></span> </h3>
+            <p>________________________________________</p>
 
           </div>
         </div>
+        <div class="c-form-bottom" ng-app>
+          <form role="form"  method="post" action="/donation/add" name="donationForm">
+            <div class="form-group">
+              <label for="c-form-name">
+                <span class="label-text" style="color:white">Donor Name:</span>
+              </label>
+              <input type="text" name="donor_name" placeholder="Donor's name..." class="c-form-donor_name form-control" required ng-model="donorName">
+              <span class="contact-error" ng-show="donationForm.donor_name.$invalid && donationForm.donor_name.$touched">Enter a name</span>
+            </div>
+            <div class="form-group">
+              <label for="c-form-amount">
+                <span class="label-text" style="color:white">Amount:</span>
+                <span class="contact-error"></span>
+              </label>
+              <input type="integer" name="amount" placeholder="Donation amount..." class="c-form-amount form-control" ng-model="amount">
+              <span class="contact-error" ng-show="donationForm.amount.$invalid && donationForm.amount.$touched">Enter a valid number </span>
+            </div>
+            <div class="form-group">
+              <label for="c-form-trans_date">
+                <span class="label-text" style="color:white">Transaction Date:</span>
+                <span class="contact-error"></span>
+              </label>
+              <input type="date" name="trans_date" placeholder="date of Transaction..." class="c-form-subject form-control" required ng-model="transDate">
+              <span class="contact-error" ng-show="donationForm.trans_date.$invalid && donationForm.trans_date.$touched">Enter the date the donation was given</span>
+            </div>
+            <div class="form-group">
+              <label for="c-form-type">
+                <span class="label-text" style="color:white">Donation Type:</span>
+                <span class="contact-error"></span>
+              </label>
+              <input type="text" name="type" placeholder="type of donation(eg.cash,clothes etc)..." class="c-form-subject form-control" ng-model="type">
+              <span class="contact-error" ng-show="donationForm.receipt_no.$invalid && donationForm.receipt_no.$touched">Donation type</span>
+            </div>
 
 
-        <!-- Javascript -->
-        <script src="public/js/jquery-1.11.1.min.js"></script>
-        <script src="public/js/bootstrap.min.js"></script>
-        <script src="public/js/jquery.backstretch.min.js"></script>
-        <script src="public/js/wow.min.js"></script>
-        <%# <script src="public/js/scripts.js"></script>%>
+            <button ng-show="donationForm.$valid" type="submit" class="btn btn-primary btn-md" style="color:white">Add Donation</button>
+          </form>
+        </div>
 
-        <!--[if lt IE 10]>
-            <script src="assets/js/placeholder.js"></script>
-        <![endif]-->
 
-    </body>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Javascript -->
+  <script src="/javascripts/jquery-1.11.1.min.js"></script>
+  <script src="/javascripts/bootstrap.min.js"></script>
+  <script src="/javascripts/jquery.backstretch.min.js"></script>
+  <script src="/javascripts/wow.min.js"></script>
+  <%# <script src="public/js/scripts.js"></script>%>
+
+  <!--[if lt IE 10]>
+  <script src="assets/js/placeholder.js"></script>
+  <![endif]-->
+
+</body>
 </html>

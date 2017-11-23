@@ -4,15 +4,15 @@
 <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 
-<% include head.ejs %>
+<% include ../head.ejs %>
 
-<body id="body" ng-app="assignManager" style="background-image: url(img/banner1.jpeg);">
-  <% include nav_bar.ejs %>
+<body id="body" ng-app="assignManager" style="background-image: url(/images/banner1.jpeg);">
+  <% include ../nav_bar.ejs %>
 
   <section id="assign_manager" class="works clearfix" ng-controller="populateDepartments">
     <div class="container">
 <h3 data-wow-duration="1000ms" ><span class="color"><b>Assign Manager</b></span> </h3>
-  <form action="/assign-manager" method="post">
+  <form action="/department/assign-manager" method="post">
       <table class="table table-bordered">
         <thead>
           <th style="color:white">Department</th>
@@ -25,25 +25,18 @@
             var dept_manager_flag = false;%>
           <tr>
             <td style="color:white">
-              <%=departments[di].dname%>
+              <%= departments[di].dname %>
             </td>
               <% for (mi in managers){
                   if(managers[mi].dno === departments[di].dno && managers[mi].mname != ""){
                     dept_manager_flag = true;%>
-                    <td>
-                    <input type="text" name="<%= departments[di].dname %>" value="<%= managers[mi].mname %>">
-                    </td>
-                    <td>
-                    <label style="color: white"><%= managers[mi].ssn %></label>
-                    </td>
+                    <td><input type="text" name="<%= departments[di].dname %>" value="<%= managers[mi].mname %>"></td>
+                    <td><label style="color: white"><%= managers[mi].ssn %></label></td>
                   <%}
                 }
                 if(dept_manager_flag==false){ %>
-                  <td>
-                  <input type="text" name="<%= departments[di].dname %>" >
-                  </td>
-                  <td>
-                  </td>
+                  <td><input type="text" name="<%= departments[di].dname %>" ></td>
+                  <td></td>
                 <%}%>
           </tr>
         <% } %>

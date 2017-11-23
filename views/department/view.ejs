@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include ../head.ejs %>
+
+<body id="body" style="background-image: url(/images/banner1.jpeg);">
+  <% include ../nav_bar.ejs %>
+  <!-- Contact Form -->
+  <div class="item active" >
+    <div class="container">
+      <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+        <div class="c-form-top">
+          <div class="c-form-top-left">
+
+          </div>
+        </div>
+        <div >
+          <h3 data-wow-duration="1000ms"> <span class="color"> <b>Departments Table</b> </span> </h3>
+          <p>________________________________________</p>
+          <p>                                       .</p>
+        </div>
+
+        <div class=""><table class="table table-bordered">
+          <thead>
+            <th>Name</th>
+            <th>Manager name</th>
+          </thead>
+          <tbody>
+            <% for (d in departments) { %>
+              <tr class="active">
+              <td><%= departments[d].dname %></td>
+              <% for (mi in managers){
+                  if(managers[mi].dno === departments[d].dno && managers[mi].mname != ""){
+                    dept_manager_flag = true;%>
+                    <td><%= managers[mi].mname %></td>
+                  <%}
+                }%>
+                <%if(dept_manager_flag==false){ %>
+                  <td></td>
+                <% } %>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Javascript -->
+  <script src="/javascripts/jquery-1.11.1.min.js"></script>
+  <script src="/javascripts/bootstrap.min.js"></script>
+  <script src="/javascripts/jquery.backstretch.min.js"></script>
+  <script src="/javascripts/wow.min.js"></script>
+  <%# <script src="public/js/scripts.js"></script>%>
+
+  <!--[if lt IE 10]>
+  <script src="assets/js/placeholder.js"></script>
+  <![endif]-->
+</body>
+</html>

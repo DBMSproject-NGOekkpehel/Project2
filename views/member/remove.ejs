@@ -7,9 +7,6 @@
 <% include ../head.ejs %>
 
 <style>
-  input.ng-invalid{
-    border: 3px solid red;
-  }
   span.contact-error{
     color: red;
     font-weight: bold;
@@ -61,11 +58,11 @@
     </div>
   </div>
   <!-- Javascript -->
-  <script src="javascripts/jquery-1.11.1.min.js"></script>
-  <script src="javascripts/bootstrap.min.js"></script>
+  <script src="/javascripts/jquery-1.11.1.min.js"></script>
+  <script src="/javascripts/bootstrap.min.js"></script>
   <%# <script src="javascripts/jquery.backstretch.min.js"></script>%>
-  <script src="javascripts/wow.min.js"></script>
-  <script src="javascripts/angular.min.js"></script>
+  <script src="/javascripts/wow.min.js"></script>
+  <script src="/javascripts/angular.min.js"></script>
   <%# <!-- Contact form validation -->
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.32/jquery.form.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>%>
@@ -75,38 +72,5 @@
         <!--[if lt IE 10]>
             <script src="assets/js/placeholder.js"></script>
         <![endif]-->
-
-  <script>
-    // $("#contact-form").validate();
-    // $(function() {
-    //
-    //   $("#contact-form").validate({
-    //
-    //     rules:{
-    //       member_name: {
-    //         required: true,
-    //         minlength: 2
-    //       }
-    //       EmailId: {
-    //         email: true,
-    //         required: true,
-    //         minlength: 3
-    //       }
-    //     }
-    //
-    //     messages: {
-    //       member_name: {
-    //         required: "Please enter a name",
-    //         minlength: "Make it longer..."
-    //       }
-    //       EmailId: {
-    //         email: "It has to be an email address"
-    //         required: "Can't look for you in the database without this"
-    //         minlength: "Not so short..."
-    //       }
-    //     }
-    //   });
-    // });
-  </script>
 </body>
 </html>

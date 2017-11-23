@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include ../head.ejs %>
+
+<style>
+thead {
+  color: black;
+  background-color: white;
+}
+</style>
+
+<body id="body" style="background-image: url(/images/banner1.jpeg);">
+  <% include ../nav_bar.ejs %>
+  <!-- Contact Form -->
+  <div class="item active" >
+    <div class="container">
+      <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+        <div class="c-form-top">
+          <div class="c-form-top-left">
+
+          </div>
+        </div>
+        <div >
+          <h3 data-wow-duration="1000ms"> <span class="color"> <b>Events Table</b> </span> </h3>
+          <p>________________________________________</p>
+          <p>                                       .</p>
+        </div>
+
+        <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Budget</th>
+            <th>Location</th>
+            <th>Supervisor</th>
+            <th>Date Time</th>
+          </thead>
+          <tbody>
+            <% for (e in events) { %>
+              <tr class="active">
+                <td><%= events[e].eid %></td>
+                <td><%= events[e].ename %></td>
+                <td><%= events[e].budget %></td>
+                <td><%= events[e].location %></td>
+                <td><%= events[e].mname %></td>
+                <td><%= events[e].date_time %></td>
+              </tr>
+            <% }%>
+          </tbody>
+        </table>
+      </div>
+      </div>
+    </div>
+  </div>
+  <!-- Javascript -->
+  <script src="/javascripts/jquery-1.11.1.min.js"></script>
+  <script src="/javascripts/bootstrap.min.js"></script>
+  <script src="/javascripts/jquery.backstretch.min.js"></script>
+  <script src="/javascripts/wow.min.js"></script>
+  <%# <script src="public/js/scripts.js"></script>%>
+
+  <!--[if lt IE 10]>
+  <script src="assets/js/placeholder.js"></script>
+  <![endif]-->
+</body>
+</html>

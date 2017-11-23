@@ -69,10 +69,10 @@ span.contact-error{
               <label for="c-form-dob">
                 <span class="label-text" style="color:white">Date Of Birth:</span>
               </label>
-              <%# <input type="date" name="dob" placeholder="Member's Date of Birth..." class="c-form-subject form-control" required ng-model="dateOfBirth">%>
-              <datepicker date-format="yyyy-MM-dd">
-                <input ng-model="dateOfBirth" type="text" name="dob" required class="c-form-subject form-control" >
-              </datepicker>
+              <input type="date" name="dob" placeholder="Member's Date of Birth..." class="c-form-subject form-control" required ng-model="dateOfBirth">
+              <%# <div date-picker id="myDatePicker"><input date-time format="yyyy-MM-dd" type="datetime" required ng-model="dateOfBirth" name="dob" class="c-form-subject form-control" /></div>%>
+
+
               <span class="contact-error" ng-show="memberForm.dob.$invalid && memberForm.dob.$touched">Birth date please...</span>
             </div>
             <div class="form-group">
@@ -136,8 +136,9 @@ span.contact-error{
   <script src="javascripts/bootstrap.min.js"></script>
   <script src="javascripts/jquery.backstretch.min.js"></script>
   <script src="javascripts/wow.min.js"></script>
-  <script src="javascripts/angular_datepicker.min.js"></script>
-  <script src=javascripts/angular-datepicker.js></script>
+  <%# <script src="javascripts/angular_datepicker.min.js"></script>%>
+  <%# <script src=javascripts/angular-datepicker.js></script>%>
+  <script src="javascripts/bundle.js"></script>
   <%# <script src="public/js/scripts.js"></script>%>
 
   <!--[if lt IE 10]>

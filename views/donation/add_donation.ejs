@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include head.ejs %>
+
+<body id="body" style="background-image: url(img/banner1.jpeg);">
+  <% include nav_bar.ejs %>
+
+  <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> 
+
+<!--Font Awesome (added because you use icons in your prepend/append)-->
+<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+<!-- Inline CSS based on choices in "Settings" tab -->
+<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+           
+    <!-- Contact Form -->
+    <div class="item active" >
+          <div class="container">
+
+                <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+
+                      <div class="c-form-top">
+                        <div class="c-form-top-left">
+                          <h3 data-wow-duration="1000ms" ><span class="color"><b>Add New Donation</b></span> </h3>
+                <p>________________________________________</p>
+
+                        </div>
+                      </div>
+                      <div class="c-form-bottom">
+                        <form role="form"  method="post" action="/add_donation_data">
+                          <div class="form-group">
+                            <label for="c-form-name">
+                              <span class="label-text" style="color:white">Donor Name:</span>
+                              <span class="contact-error"></span>
+                            </label>
+                            <input type="text" name="donor_name" placeholder="Donor's name..." class="c-form-donor_name form-control" id="c-form-donor_name">
+                          </div>
+                          <div class="form-group">
+                            <label for="c-form-amount">
+                              <span class="label-text" style="color:white">Amount:</span>
+                              <span class="contact-error"></span>
+                            </label>
+                              <input type="integer" name="amount" placeholder="Donation amount..." class="c-form-amount form-control" id="c-form-amount">
+                            </div>
+                            <div class="form-group">
+                            <label class="control-label " for="date">
+                              <span class="label-text" style="color:white">Date Of Transaction:</span>
+                            </label>
+                            <input class="c-form-subject form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                          </div>
+                            <div class="form-group">
+                              <label for="c-form-receipt_no">
+                              <span class="label-text" style="color:white">Receipt Number:</span>
+                              <span class="contact-error"></span>
+                              </label>
+                              <input type="integer" name="receipt_no" placeholder="Receipt number..." class="c-form-subject form-control" id="c-form-receipt_no">
+                            </div>
+                            <div class="form-group">
+                              <label for="c-form-type">
+                              <span class="label-text" style="color:white">Donation Type:</span>
+                              <span class="contact-error"></span>
+                              </label>
+                              <input type="text" name="type" placeholder="type of donation(eg.cash,clothes etc)..." class="c-form-subject form-control" id="c-form-type">
+                            </div>
+                            
+
+                            <button type="submit" class="btn btn-primary btn-md" style="color:white">Add Donation</button>
+                        </form>
+                      </div>
+
+
+              </div>
+
+          </div>
+        </div>
+
+
+        <!-- Javascript -->
+        <script src="public/js/jquery-1.11.1.min.js"></script>
+        <script src="public/js/bootstrap.min.js"></script>
+        <script src="public/js/jquery.backstretch.min.js"></script>
+        <script src="public/js/wow.min.js"></script>
+        <%# <script src="public/js/scripts.js"></script>%>
+
+        <!--[if lt IE 10]>
+            <script src="assets/js/placeholder.js"></script>
+        <![endif]-->
+
+    </body>
+</html>

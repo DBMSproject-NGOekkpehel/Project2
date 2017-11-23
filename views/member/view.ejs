@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<% include ../head.ejs %>
+
+<style>
+thead {
+  color: black;
+  background-color: white;
+}
+</style>
+
+<body id="body" style="background-image: url(/images/banner1.jpeg);">
+  <% include ../nav_bar.ejs %>
+  <!-- Contact Form -->
+  <div class="item active" >
+    <div class="container">
+      <div class="col-sm-12 c-form-box wow fadeInUp">
+        <div class="c-form-top">
+          <div class="c-form-top-left">
+
+          </div>
+        </div>
+        <div class="col-sm-offset-3">
+          <h3 data-wow-duration="1000ms"> <span class="color"> <b>Members Table</b> </span> </h3>
+          <p>________________________________________</p>
+          <p>                                       .</p>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+  <div class=""><table class="table table-bordered">
+    <thead>
+      <th>Name</th>
+      <th>Joining Date</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Department</th>
+      <th>DOB</th>
+      <th>Father's name</th>
+      <th>Corresponding Address</th>
+      <th>Gender</th>
+      <th>College</th>
+    </thead>
+    <tbody>
+      <% for (m in members) { %>
+        <tr class="active">
+        <td><%= members[m].mname %></td>
+        <td><%= members[m].joining_date %></td>
+        <td><%= members[m].phone %></td>
+        <td><%= members[m].email %></td>
+        <td><%= members[m].dname %></td>
+        <td><%= members[m].date_of_birth %></td>
+        <td><%= members[m].father_name %></td>
+        <td><%= members[m].corresponding_address %></td>
+        <td><%= members[m].gender %></td>
+        <td><%= members[m].college %></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+  <!-- Javascript -->
+  <script src="/javascripts/jquery-1.11.1.min.js"></script>
+  <script src="/javascripts/bootstrap.min.js"></script>
+  <script src="/javascripts/jquery.backstretch.min.js"></script>
+  <script src="/javascripts/wow.min.js"></script>
+  <%# <script src="public/js/scripts.js"></script>%>
+
+  <!--[if lt IE 10]>
+  <script src="assets/js/placeholder.js"></script>
+  <![endif]-->
+
+</body>
+</html>
