@@ -850,8 +850,14 @@ angular.module("datePicker").run(["$templateCache", function($templateCache) {
 }]);
 })(angular);
 },{}],2:[function(require,module,exports){
+<<<<<<< HEAD
 var angularDatepicker = require('angular-datepicker');
 
 console.log(angularDatepicker);
+=======
+var angularDatepicker=require('angular-datepicker')
+
+console.log("Divyaksh was here");
+>>>>>>> f6fde70e4b6d7742395e435f131aba944fe561fa
 
 },{"angular-datepicker":1}]},{},[2]);

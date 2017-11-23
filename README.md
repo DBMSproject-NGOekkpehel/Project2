@@ -34,7 +34,7 @@ delimiter //
 
 DROP PROCEDURE IF EXISTS insertNewMember//
 CREATE PROCEDURE insertNewMember
-(IN name varchar(20), IN join_date date, IN phone_no varchar(10), IN email_id varchar(50), IN dname varchar(20), IN dateOfBirth date, IN fatherName varchar(50), IN correspondingAddress varchar(50), IN permanentAddress varchar(50), IN gender varchar(6), IN college varchar(50))
+(IN name varchar(20), IN join_date date, IN phone_no varchar(10), IN email_id varchar(100), IN dname varchar(20), IN dateOfBirth date, IN fatherName varchar(50), IN correspondingAddress varchar(50), IN permanentAddress varchar(50), IN gender varchar(6), IN college varchar(50))
 BEGIN
   IF NOT EXISTS (Select * FROM Department d WHERE d.dname LIKE dname) THEN
     INSERT INTO Department(dname) VALUES(dname);
