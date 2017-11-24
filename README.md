@@ -58,6 +58,8 @@ END//
 
 delimiter ;
 
+delimiter //
+
 
 mysql> show tables;
 +--------------------+
@@ -126,7 +128,7 @@ mysql> desc Members;
 | phone                 | varchar(10)  | YES  |     | NULL    |                |
 | email                 | varchar(50)  | YES  |     | NULL    |                |
 | position              | varchar(20)  | YES  |     | NULL    |                |
-| dno                   | int(11)      | YES  |     | NULL    |                |
+| dno                   | int(11)      | YES  | MUL | NULL    |                |
 | date_of_birth         | date         | YES  |     | NULL    |                |
 | father_name           | varchar(50)  | YES  |     | NULL    |                |
 | corresponding_address | varchar(200) | YES  |     | NULL    |                |
@@ -136,9 +138,109 @@ mysql> desc Members;
 +-----------------------+--------------+------+-----+---------+----------------+
 13 rows in set (0.00 sec)
 
+
 delimiter //
 CREATE TRIGGER
 
+```
+
+### Using PromiseJS and Mysql Connector
+```JavaScript
+connection.query('SELECT m.mname, d.dname FROM Members m, Department d WHERE d.dno=m.dno ORDER BY m.ssn DESC LIMIT 5;').then((rows) => {
+  // Members preview data
+  console.log(JSON.stringify(rows));
+  members = rows;
+  // Query to get latest added departments
+  return connection.query('SELECT d.dname, m.mname FROM Department d, Members m WHERE d.mgrssn=m.ssn ORDER BY d.dno ASC LIMIT 5;')
+}).then((rows) => {
+
+  // Departments Preview data
+  console.log(JSON.stringify(rows));
+  departments = rows;
+  flag += 1;
+
+  // Query to get latest added donations
+  return connection.query('SELECT donor_name, type FROM Donations ORDER BY receipt_no DESC LIMIT 5;')
+}).then((rows) => {
+
+  // Donations Preview data
+  console.log(JSON.stringify(rows));
+  donations = rows;
+  flag += 1;
+
+  // Query to get latest added Events
+  return connection.query('SELECT ename, location FROM Events ORDER BY eid DESC LIMIT 5;')
+
+}).then((rows) => {
+
+  // Events Preview data
+  console.log(JSON.stringify(rows));
+  events = rows;
+  flag += 1;
+
+  // Query to get the event members
+  return connection.query('SELECT ename, mname FROM Events e, Members m, Event_Members em where e.eid=em.eid and m.ssn=em.memssn LIMIT 5;')
+
+  // res.render('index', {departments: departments, members: members, donations: donations, events: events});
+
+}).then((rows) => {
+
+  // Event Members Preview data
+  console.log(JSON.stringify(rows));
+  event_members = rows;
+
+  res.render('index', {departments: departments, members: members, donations: donations, events: events, event_members: event_members});
+});
+```
+
+### AngularJS Form validation
+```HTML
+<div class="c-form-bottom" ng-app>
+
+  <form role="form" action="/member/remove" id="contact-form" method="post" name="contactForm">
+    <div class="form-group" >
+
+      <label for="c-form-name">
+
+        <span class="label-text" style="color:white">NAME:</span>
+      </label>
+      <input type="text" name="member_name" placeholder="Member's name..." class="c-form-subject form-control" required ng-model="name">
+      <span class="contact-error" ng-show="contactForm.member_name.$invalid && contactForm.member_name.$touched">Give a name to check the database...</span>
+    </div>
+
+    <div class="form-group">
+      <label for="c-form-EmailId">
+        <span class="label-text" style="color:white">EMAIL ID:</span>
+
+      </label>
+      <input type="email" name="EmailId" placeholder="Members Email address..." class="c-form-subject form-control" required ng-model="emailID">
+      <span class="contact-error" ng-show="contactForm.EmailId.$invalid && contactForm.EmailId.$touched">Email is required</span>
+    </div>
+
+    <button ng-show="contactForm.$valid" type="submit" class="btn btn-primary btn-md" style="color:white" action="">Remove</button>
+</form>
+</div>
+```
+
+### Making and using Routes on ExpressJS
+```JavaScript
+var index = require('./routes/index');
+var member = require('./routes/member');
+var events = require('./routes/events');
+var department = require('./routes/department');
+var donation = require('./routes/donation');
+
+var app = express();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use('/', index);
+app.use('/member', member);
+app.use('/department', department);
+app.use('/events', events);
+app.use('/donation', donation);
 ```
 
 - Use node query to get the supssn for a new event
