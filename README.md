@@ -60,6 +60,18 @@ delimiter ;
 
 delimiter //
 
+DROP TRIGGER IF EXISTS deleteDepartment //
+
+CREATE TRIGGER deleteDepartment AFTER DELETE ON Members FOR EACH ROW
+BEGIN
+  SET @deptNo = (SELECT dno FROM Department d WHERE NOT EXISTS (SELECT * FROM Members m WHERE m.dno=d.dno));
+  IF (@deptNo IS NOT NULL) THEN
+    DELETE FROM Department WHERE dno=@deptNo;
+  END IF;
+END//
+
+delimiter ;
+
 
 mysql> show tables;
 +--------------------+
