@@ -34,7 +34,21 @@ thead {
       </div>
     </div>
   </div>
-  <div class=""><table class="table table-bordered">
+  <div ng-app="memberApp">
+
+    <div class="col-sm-3" ng-controller="memberController">
+      <div class="">
+        <label>Name:</label>
+        <input type="text" ng-blur='ask()' ng-model="name"/>
+      </div>
+      <div class="">
+        <label>Joining Date</label>
+        <input type="text" ng-blur="ask()" ng-model="joiningDate">
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-9"><table class="table table-bordered">
     <thead>
       <th>Name</th>
       <th>Joining Date</th>
@@ -76,5 +90,32 @@ thead {
   <script src="assets/js/placeholder.js"></script>
   <![endif]-->
 
+  <script>
+  var app = angular.module('memberApp', []);
+
+
+  app.controller('memberController', function($scope, $http) {
+
+  $scope.name = '';
+  $scope.joiningDate = new Date();
+
+    $scope.ask = function(){
+
+      let vName = $scope.name;
+      let vJoiningDate = $scope.joiningDate;
+
+      let params = {name: vName, joining_date: vJoiningDate};
+      let request = {
+        method: 'post',
+        url: '/member/view_data',
+        data: params
+      };
+
+      $http(request).then(function(data, status, headers, config) {
+        console.log(JSON.stringify(data));
+      });
+    }
+  });
+  </script>
 </body>
 </html>

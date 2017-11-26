@@ -122,4 +122,16 @@ router.get('/view', (req, res) => {
   });
 });
 
+router.post('/view_data', (req, res) => {
+
+  console.log(JSON.stringify(req.body));
+
+  var nameClause = "'%" + req.body.member_name + "%'"
+  var joiningDateClause = "'" + req.body.joining_date + "'";
+  // con.query('SELECT * FROM Members WHERE mname LIKE ' + nameClause + 'and joining_date=' + joiningDateClause + ';' , (err, rows, fields) => {
+  //   console.log(JSON.stringify(rows));
+  //   res.send(JSON.stringify(rows));
+  // });
+});
+
 module.exports = router;
