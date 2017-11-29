@@ -72,6 +72,19 @@ END//
 
 delimiter ;
 
+delimiter //
+
+DROP PROCEDURE IF EXISTS insertNewEventMembers //
+
+CREATE PROCEDURE insertNewEventMembers (IN event_name varchar(50), IN member_name varchar(20))
+BEGIN
+  IF NOT EXISTS (SELECT * FROM Event_Members WHERE eid IN (SELECT eid FROM Events WHERE ename LIKE event_name) and ssn (SELECT ssn FROM Members WHERE mname LIKE member_name)) THEN
+    INSERT INTO Event_Members VALUES ((SELECT eid FROM Events WHERE ename LIKE event_name),(SELECT ssn FROM Members WHERE mname LIKE member_name));
+  END IF;
+END//
+
+delimiter ;
+
 
 mysql> show tables;
 +--------------------+
