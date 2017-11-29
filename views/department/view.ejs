@@ -6,12 +6,39 @@
 
 <% include ../head.ejs %>
 
+<style>
+thead {
+  color: black;
+  background-color: white;
+}
+</style>
+
 <body id="body" style="background-image: url(/images/banner1.jpeg);">
   <% include ../nav_bar.ejs %>
   <!-- Contact Form -->
   <div class="item active" ng-app="departmentApp">
     <div class="container" ng-controller="departmentController">
+       <div class="item active" >
+        <div class="container">
+          <div class="col-sm-12 c-form-box wow fadeInUp">
+            <div class="c-form-top">
+              <div class="c-form-top-left">
 
+            </div>
+          </div>
+      
+
+      
+      <div class="col-sm-offset-3">
+          <h3 data-wow-duration="1000ms"> <span class="color"> <b>Departments Table</b> </span> </h3>
+          <p>________________________________________</p>
+          <p>                                       .</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div>
       <!--Please change this -->
       <div class="col-sm-2">
         <div class="form-group">
@@ -22,22 +49,10 @@
           <label>Manager Name:</label>
           <input type="text" ng-blur='ask()' ng-model="mname" class="form-control"/>
         </div>
-        <!-- Till here -->
-
       </div>
-      <div class="col-sm-6 col-sm-offset-1 c-form-box wow fadeInUp">
-        <div class="c-form-top">
-          <div class="c-form-top-left">
-
-          </div>
-        </div>
-        <div >
-          <h3 data-wow-duration="1000ms"> <span class="color"> <b>Departments Table</b> </span> </h3>
-          <p>________________________________________</p>
-          <p>                                       .</p>
-        </div>
-
-        <div class=""><table class="table table-bordered">
+    </div>
+        <!-- Till here -->
+        <div class="col-sm-10"><table class="table table-bordered">
           <thead>
             <th>Name</th>
             <th>Manager name</th>
