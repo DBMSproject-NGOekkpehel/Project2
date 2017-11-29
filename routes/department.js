@@ -67,6 +67,7 @@ router.post('/assign-manager', (req, res) => {
   var values = req.body;
   for (var dname in values) {
     if (values.hasOwnProperty(dname))
+    console.log('')
     con2.execute('UPDATE Department SET mgrssn=(SELECT ssn FROM Members WHERE mname LIKE ?) WHERE dname=?;',[values[dname], dname], (err, rows, fields)=>{});
   }
 
@@ -102,8 +103,6 @@ router.post('/view_data', (req, res) => {
 
   con.query(queryString , (err, rows, fields) => {
     if (err) throw err;
-    // console.log(JSON.stringify(rows));
-    // console.log(rows[0].mname);
     res.send(JSON.stringify(rows));
   });
 });
