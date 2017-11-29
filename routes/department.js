@@ -67,8 +67,12 @@ router.post('/assign-manager', (req, res) => {
   var values = req.body;
   for (var dname in values) {
     if (values.hasOwnProperty(dname))
-    console.log('')
-    con2.execute('UPDATE Department SET mgrssn=(SELECT ssn FROM Members WHERE mname LIKE ?) WHERE dname=?;',[values[dname], dname], (err, rows, fields)=>{});
+    console.log('Department: ' + dname);
+    console.log('Managers: ' + values[dname]);
+    // con2.execute('UPDATE Department SET mgrssn=(SELECT ssn FROM Members WHERE mname LIKE ?) WHERE dname=?;',[values[dname], dname], (err, rows, fields)=>{});
+    var queryString = 'UPDATE Department SET mgrssn=(SELECT ssn FROM Members WHERE mname LIKE ' + "'%" + values[dname] + "%'" + ') WHERE dname=' + "'" + dname + "'" + ';';
+    console.log(queryString);
+    con.query(queryString, (err, rows, fields) => {});
   }
 
   res.redirect('/');
