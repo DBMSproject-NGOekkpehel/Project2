@@ -90,4 +90,22 @@ router.get('/view',(req, res)=> {
   });
 });
 
-  module.exports = router;
+router.post('/view_data', (req, res) => {
+  let dname = "'%" + req.body.dname + "%'";
+  let mname = "'%" + req.body.mname + "%'";
+
+  let queryString = 'SELECT * FROM Department d, Members m WHERE mgrssn=ssn'
+  + ' AND m.mname LIKE ' + mname
+  + ' AND d.dname LIKE ' + dname + ';';
+
+  console.log(queryString);
+
+  con.query(queryString , (err, rows, fields) => {
+    if (err) throw err;
+    // console.log(JSON.stringify(rows));
+    // console.log(rows[0].mname);
+    res.send(JSON.stringify(rows));
+  });
+});
+
+module.exports = router;

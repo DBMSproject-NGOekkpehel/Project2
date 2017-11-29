@@ -16,9 +16,27 @@ thead {
 <body id="body" style="background-image: url(/images/banner1.jpeg);">
   <% include ../nav_bar.ejs %>
   <!-- Contact Form -->
-  <div class="item active" >
-    <div class="container">
-      <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+  <div class="item active" ng-app="eventApp" >
+    <div class="container" ng-controller="eventController">
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Name:</label>
+          <input type="text" ng-blur='ask()' ng-model="ename" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Budget:</label>
+          <input type="text" ng-blur='ask()' ng-model="budget" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Location:</label>
+          <input type="text" ng-blur='ask()' ng-model="location" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Supervisor name:</label>
+          <input type="text" ng-blur='ask()' ng-model="mname" class="form-control"/>
+        </div>
+      </div>
+      <div class="col-sm-6 col-sm-offset-1 c-form-box wow fadeInUp">
         <div class="c-form-top">
           <div class="c-form-top-left">
 
@@ -29,7 +47,6 @@ thead {
           <p>________________________________________</p>
           <p>                                       .</p>
         </div>
-
         <div class="table-responsive">
         <table class="table table-hover table-bordered">
           <thead>
@@ -41,16 +58,14 @@ thead {
             <th>Date Time</th>
           </thead>
           <tbody>
-            <% for (e in events) { %>
-              <tr class="active">
-                <td><%= events[e].eid %></td>
-                <td><%= events[e].ename %></td>
-                <td><%= events[e].budget %></td>
-                <td><%= events[e].location %></td>
-                <td><%= events[e].mname %></td>
-                <td><%= events[e].date_time %></td>
-              </tr>
-            <% }%>
+            <tr class="active" ng-repeat="x in events">
+              <td>{{x.eid}}</td>
+              <td>{{x.ename}}</td>
+              <td>{{x.budget}}</td>
+              <td>{{x.location}}</td>
+              <td>{{x.mname}}</td>
+              <td>{{x.date_time}}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -67,5 +82,60 @@ thead {
   <!--[if lt IE 10]>
   <script src="assets/js/placeholder.js"></script>
   <![endif]-->
+
+  <script>
+
+  var app = angular.module('eventApp', []);
+
+  app.controller('eventController', function($scope, $http) {
+    $scope.ename = '';
+    $scope.budget = '';
+    $scope.location = '';
+    $scope.mname = '';
+
+    var params = {
+      ename: $scope.ename,
+      budget: $scope.budget,
+      location: $scope.location,
+      mname: $scope.mname
+    };
+
+    var request = {
+      method: 'post',
+      url: '/events/view_data',
+      data: params
+    };
+
+    $http(request).then(function(receivedData, status, headers, config) {
+      console.log(JSON.stringify(receivedData.data));
+
+      $scope.events = receivedData.data;
+    });
+
+    $scope.ask = function(){
+
+      params = {
+        ename: $scope.ename,
+        budget: $scope.budget,
+        location: $scope.location,
+        mname: $scope.mname
+      };
+
+      request = {
+        method: 'post',
+        url: '/events/view_data',
+        data: params
+      };
+
+      $http(request).then(function(receivedData, status, headers, config) {
+        console.log(JSON.stringify(receivedData.data));
+
+        $scope.events = receivedData.data;
+      });
+    }
+
+  });
+
+  </script>
 </body>
 </html>

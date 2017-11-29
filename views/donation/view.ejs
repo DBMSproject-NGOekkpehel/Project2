@@ -10,9 +10,31 @@
 <body id="body" style="background-image: url(/images/banner1.jpeg);">
   <% include ../nav_bar.ejs %>
   <!-- Contact Form -->
-  <div class="item active" >
-    <div class="container">
-      <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+  <div class="item active" ng-app="donationApp" >
+    <div class="container" ng-controller="donationController" >
+
+      <%# Please correct this%>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Donor Name:</label>
+          <input type="text" ng-blur='ask()' ng-model="donor_name" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Type:</label>
+          <input type="text" ng-blur='ask()' ng-model="type" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Amount:</label>
+          <input type="text" ng-blur='ask()' ng-model="amount" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Receipt No:</label>
+          <input type="text" ng-blur='ask()' ng-model="receipt_no" class="form-control"/>
+        </div>
+      </div>
+      <%# Till here%>
+
+      <div class="col-sm-9 col-sm-offset-1 c-form-box wow fadeInUp">
         <div class="c-form-top">
           <div class="c-form-top-left">
 
@@ -33,35 +55,87 @@
             <th>Receipt No</th>
           </thead>
           <tbody>
-            <% for (d in donations) { %>
-              <tr class="active">
-              <td><%= donations[d].donor_name %></td>
-              <td><%= donations[d].type %></td>
-              <td><%= donations[d].amount %></td>
-              <td><%= donations[d].transaction_date %></td>
-              <td><%= donations[d].receipt_no %></td>
-              </tr>
-              <% } %>
-            </tbody>
-          </table>
-        </div>
 
+            <tr class="active" ng-repeat="x in donations">
+              <td>{{x.donor_name}}</td>
+              <td>{{x.type}}</td>
+              <td>{{x.amount}}</td>
+              <td>{{x.transaction_date}}</td>
+              <td>{{x.receipt_no}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+
     </div>
   </div>
+</div>
 
-  <!-- Javascript -->
-  <script src="public/js/jquery-1.11.1.min.js"></script>
-  <script src="public/js/bootstrap.min.js"></script>
-  <script src="public/js/jquery.backstretch.min.js"></script>
-  <script src="public/js/wow.min.js"></script>
-  <%# <script src="public/js/scripts.js"></script>%>
+<!-- Javascript -->
+<script src="public/js/jquery-1.11.1.min.js"></script>
+<script src="public/js/bootstrap.min.js"></script>
+<script src="public/js/jquery.backstretch.min.js"></script>
+<script src="public/js/wow.min.js"></script>
+<%# <script src="public/js/scripts.js"></script>%>
 
-  <!--[if lt IE 10]>
-  <script src="assets/js/placeholder.js"></script>
-  <![endif]-->
+<!--[if lt IE 10]>
+<script src="assets/js/placeholder.js"></script>
+<![endif]-->
 
+<script>
 
+var app = angular.module('donationApp', []);
+
+app.controller('donationController', function($scope, $http) {
+
+  $scope.donor_name = '';
+  $scope.type = '';
+  $scope.amount = '';
+  $scope.receipt_no = '';
+
+  var params = {
+    donor_name: $scope.donor_name,
+    type: $scope.type,
+    amount: $scope.amount,
+    receipt_no: $scope.receipt_no
+  };
+
+  var request = {
+    method: 'post',
+    url: '/donation/view_data',
+    data: params
+  };
+
+  $http(request).then(function(receivedData, status, headers, config) {
+    console.log(JSON.stringify(receivedData.data));
+
+    $scope.donations = receivedData.data;
+  });
+
+  $scope.ask = function(){
+
+    params = {
+      donor_name: $scope.donor_name,
+      type: $scope.type,
+      amount: $scope.amount,
+      receipt_no: $scope.receipt_no
+    };
+
+    request = {
+      method: 'post',
+      url: '/donation/view_data',
+      data: params
+    };
+
+    $http(request).then(function(receivedData, status, headers, config) {
+      console.log(JSON.stringify(receivedData.data));
+
+      $scope.donations = receivedData.data;
+    });
+  }
+});
+
+</script>
 
 
 

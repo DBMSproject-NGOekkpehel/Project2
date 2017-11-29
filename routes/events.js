@@ -84,4 +84,28 @@ router.get('/view', (req, res) => {
   });
 });
 
+router.post('/view_data', (req, res) => {
+  let ename = "'%" + req.body.ename + "%'";
+  let budget = req.body.budget;
+  let location = "'%" + req.body.location + "%'";
+  let mname = "'%" + req.body.mname + "%'";
+
+  let queryString = 'SELECT * FROM Events e, Members m WHERE e.supssn=m.ssn'
+  + ' AND ename LIKE ' + ename
+  + ' AND location LIKE ' + location
+  + ' AND m.mname LIKE ' + mname;
+
+  if(budget) { queryString = queryString + ' AND budget=' + budget; }
+  queryString = queryString + ';';
+
+  console.log(queryString);
+
+  con.query(queryString , (err, rows, fields) => {
+    if (err) throw err;
+    // console.log(JSON.stringify(rows));
+    // console.log(rows[0].mname);
+    res.send(JSON.stringify(rows));
+  });
+});
+
 module.exports = router;

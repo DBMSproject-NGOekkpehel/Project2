@@ -9,9 +9,23 @@
 <body id="body" style="background-image: url(/images/banner1.jpeg);">
   <% include ../nav_bar.ejs %>
   <!-- Contact Form -->
-  <div class="item active" >
-    <div class="container">
-      <div class="col-sm-6 col-sm-offset-3 c-form-box wow fadeInUp">
+  <div class="item active" ng-app="departmentApp">
+    <div class="container" ng-controller="departmentController">
+
+      <!--Please change this -->
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Department name:</label>
+          <input type="text" ng-blur='ask()' ng-model="dname" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label>Manager Name:</label>
+          <input type="text" ng-blur='ask()' ng-model="mname" class="form-control"/>
+        </div>
+        <!-- Till here -->
+
+      </div>
+      <div class="col-sm-6 col-sm-offset-1 c-form-box wow fadeInUp">
         <div class="c-form-top">
           <div class="c-form-top-left">
 
@@ -29,20 +43,10 @@
             <th>Manager name</th>
           </thead>
           <tbody>
-            <% for (d in departments) { %>
-              <tr class="active">
-              <td><%= departments[d].dname %></td>
-              <% for (mi in managers){
-                  if(managers[mi].dno === departments[d].dno && managers[mi].mname != ""){
-                    dept_manager_flag = true;%>
-                    <td><%= managers[mi].mname %></td>
-                  <%}
-                }%>
-                <%if(dept_manager_flag==false){ %>
-                  <td></td>
-                <% } %>
-              </tr>
-              <% } %>
+            <tr class="active" ng-repeat="x in departments">
+              <td>{{x.dname}}</td>
+              <td>{{x.mname}}</td>
+            </tr>
             </tbody>
           </table>
         </div>
@@ -59,5 +63,52 @@
   <!--[if lt IE 10]>
   <script src="assets/js/placeholder.js"></script>
   <![endif]-->
+
+  <script>
+    var app = angular.module('departmentApp', []);
+
+    app.controller('departmentController', function($scope, $http) {
+
+      $scope.dname = '';
+      $scope.mname = '';
+
+      var params = {
+        dname: $scope.dname,
+        mname: $scope.mname
+      };
+
+      var request = {
+        method: 'post',
+        url: '/department/view_data',
+        data: params
+      };
+
+      $http(request).then(function(receivedData, status, headers, config) {
+        console.log(JSON.stringify(receivedData.data));
+
+        $scope.departments = receivedData.data;
+      });
+
+      $scope.ask = function() {
+        params = {
+          dname: $scope.dname,
+          mname: $scope.mname
+        };
+
+        request = {
+          method: 'post',
+          url: '/department/view_data',
+          data: params
+        };
+
+        $http(request).then(function(receivedData, status, headers, config) {
+          console.log(JSON.stringify(receivedData.data));
+
+          $scope.departments = receivedData.data;
+        });
+      }
+
+    });
+  </script>
 </body>
 </html>

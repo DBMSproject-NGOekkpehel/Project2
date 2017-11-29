@@ -38,52 +38,52 @@ thead {
       </div>
       <div >
 
-        <div class="col-sm-3">
+        <div class="col-sm-2">
           <div class="form-group">
             <label>Name:</label>
             <input type="text" ng-blur='ask()' ng-model="name" class="form-control"/>
           </div>
           <div class="form-group">
             <label>Phone</label>
-            <input type="text" ng-blur="ask()" ng-model="joiningDate" class="form-control">
+            <input type="text" ng-blur="ask()" ng-model="phone" class="form-control">
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="text" ng-blur="ask()" ng-model="joiningDate" class="form-control">
+            <input type="text" ng-blur="ask()" ng-model="email" class="form-control">
           </div>
           <div class="form-group">
             <label>Department</label>
-            <input type="text" ng-blur="ask()" ng-model="joiningDate" class="form-control">
+            <input type="text" ng-blur="ask()" ng-model="dname" class="form-control">
           </div>
           <div class="form-group">
             <label>Father's name</label>
-            <input type="text" ng-blur="ask()" ng-model="joiningDate" class="form-control">
+            <input type="text" ng-blur="ask()" ng-model="father_name" class="form-control">
           </div>
           <div class="form-group">
             <label>Corresponding Address</label>
-            <input type="text" ng-blur="ask()" ng-model="joiningDate" class="form-control">
+            <input type="text" ng-blur="ask()" ng-model="corresponding_address" class="form-control">
           </div>
           <div class="form-group">
             <label>Permanent Address</label>
-            <input type="text" ng-blur="ask()" ng-model="joiningDate" class="form-control">
+            <input type="text" ng-blur="ask()" ng-model="permanent_address" class="form-control">
           </div>
           <div class="form-group">
             <label>Gender</label>
             <div>
               <label>Male</label>
-              <input type="radio" value="Male" name="gender" />
+              <input type="radio" value="Male" name="gender" ng-model="male" />
               <label>Female</label>
-              <input type="radio" value="Female" name="gender" />
+              <input type="radio" value="Female" name="gender" ng-model="female" />
             </div>
           </div>
           <div class="form-group">
             <label>College</label>
-            <input type="text" ng-blur="ask()" ng-model="joiningDate" class="form-control">
+            <input type="text" ng-blur="ask()" ng-model="college" class="form-control">
           </div>
         </div>
       </div>
 
-      <div class="col-sm-9"><table class="table table-bordered">
+      <div class="col-sm-10"><table class="table table-bordered">
         <thead>
           <th>Name</th>
           <th>Joining Date</th>
@@ -97,21 +97,6 @@ thead {
           <th>College</th>
         </thead>
         <tbody>
-          <!--<% for (m in members) { %>
-          <tr class="active">
-          <td><%= members[m].mname %></td>
-          <td><%= members[m].joining_date %></td>
-          <td><%= members[m].phone %></td>
-          <td><%= members[m].email %></td>
-          <td><%= members[m].dname %></td>
-          <td><%= members[m].date_of_birth %></td>
-          <td><%= members[m].father_name %></td>
-          <td><%= members[m].corresponding_address %></td>
-          <td><%= members[m].gender %></td>
-          <td><%= members[m].college %></td>
-        </tr>
-        <% } %>-->
-        <div >
           <tr class="active" ng-repeat="x in memberData">
             <td>{{x.mname}}</td>
             <td>{{x.joining_date}}</td>
@@ -124,7 +109,6 @@ thead {
             <td>{{x.gender}}</td>
             <td>{{x.college}}</td>
           </tr>
-        </div>
       </tbody>
     </table>
   </div>
@@ -146,15 +130,90 @@ thead {
   app.controller('memberController', function($scope, $http) {
 
     $scope.name = '';
+    $scope.phone = '';
+    $scope.email = '';
+    $scope.dname = '';
+    $scope.father_name = '';
+    $scope.corresponding_address = '';
+    $scope.permanent_address = '';
+    $scope.college = '';
+    $scope.male = true;
+    $scope.female = false;
     // $scope.joiningDate = new Date();
+
+    var vName = $scope.name;
+    var vPhone = $scope.phone;
+    var vEmail = $scope.email;
+    var vDname = $scope.dname;
+    var vFatherName = $scope.father_name;
+    var vCorrespondingAddress = $scope.corresponding_address;
+    var vPermanentAddress = $scope.permanent_address;
+    var vCollege = $scope.college;
+
+    var vGender = 'Male';
+
+    if($scope.male == true){
+      vGender = 'Male';
+    }
+    else {
+      vGender = 'Female';
+    }
+
+    var params = {
+      name: vName,
+      phone: vPhone,
+      email: vEmail,
+      dname: vDname,
+      father_name: vFatherName,
+      corresponding_address: vCorrespondingAddress,
+      permanent_address: vPermanentAddress,
+      college: vCollege,
+      gender: vGender
+    };
+    var request = {
+      method: 'post',
+      url: '/member/view_data',
+      data: params
+    };
+
+    $http(request).then(function(receivedData, status, headers, config) {
+      console.log(JSON.stringify(receivedData.data));
+
+      $scope.memberData = receivedData.data;
+    });
 
     $scope.ask = function(){
 
-      let vName = $scope.name;
-      let vJoiningDate = $scope.joiningDate;
+      vName = $scope.name;
+      vPhone = $scope.phone;
+      vEmail = $scope.email;
+      vDname = $scope.dname;
+      vFatherName = $scope.father_name;
+      vCorrespondingAddress = $scope.corresponding_address;
+      vPermanentAddress = $scope.permanent_address;
+      vCollege = $scope.college;
 
-      let params = {name: vName, joining_date: vJoiningDate};
-      let request = {
+      vGender = 'Male';
+
+      if($scope.male == true){
+        vGender = 'Male';
+      }
+      else {
+        vGender = 'Female';
+      }
+
+      params = {
+        name: vName,
+        phone: vPhone,
+        email: vEmail,
+        dname: vDname,
+        father_name: vFatherName,
+        corresponding_address: vCorrespondingAddress,
+        permanent_address: vPermanentAddress,
+        college: vCollege,
+        gender: vGender
+      };
+      request = {
         method: 'post',
         url: '/member/view_data',
         data: params

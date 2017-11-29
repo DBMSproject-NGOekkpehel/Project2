@@ -62,4 +62,28 @@ router.get('/view', (req, res) => {
   });
 });
 
+router.post('/view_data', (req, res) => {
+  let donor_name = "'%" + req.body.donor_name + "%'";
+  let type = "'%" + req.body.type + "%'";
+  let amount = req.body.amount;
+  let receipt_no = req.body.receipt_no;
+
+  let queryString = 'SELECT * FROM Donations WHERE'
+  + ' donor_name LIKE ' + donor_name
+  + ' AND type LIKE ' + type;
+
+  if(amount) { queryString = queryString + ' AND amount=' + amount; }
+  if(receipt_no) { queryString = queryString + ' AND receipt_no=' + receipt_no; }
+
+  queryString = queryString + ';';
+
+  console.log(queryString);
+  con.query(queryString , (err, rows, fields) => {
+    if (err) throw err;
+    // console.log(JSON.stringify(rows));
+    // console.log(rows[0].mname);
+    res.send(JSON.stringify(rows));
+  });
+})
+
 module.exports = router;

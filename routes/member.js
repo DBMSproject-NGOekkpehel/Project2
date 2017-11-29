@@ -117,22 +117,52 @@ router.post('/remove', (req, res) => {
 });
 
 router.get('/view', (req, res) => {
-  con.query('SELECT * FROM Members m, Department d WHERE m.dno=d.dno;', (err, rows, fields) => {
-    res.render('member/view', {members: rows});
-  });
+  // con.query('SELECT * FROM Members m, Department d WHERE m.dno=d.dno;', (err, rows, fields) => {
+  //   res.render('member/view', {members: rows});
+  // });
+
+  res.render('member/view');
 });
 
 router.post('/view_data', (req, res) => {
 
   console.log(JSON.stringify(req.body));
 
-  var nameClause = "'%" + req.body.name + "%'"
-  // var joiningDateClause = "'" + req.body.joining_date + "'";
-  var queryString = 'SELECT * FROM Members WHERE mname LIKE ' + nameClause + ';';
+  let name = "'%" + req.body.name + "%'";
+  let phone = req.body.phone;
+  let email = "'%" + req.body.email + "%'";
+  let dname = "'%" + req.body.dname + "%'";
+  let fatherName = "'%" + req.body.father_name + "%'";
+  let correspondingAddress = "'%" + req.body.corresponding_address + "%'";
+  let permanentAddress = "'%" + req.body.permanent_address + "%'";
+  let college = "'%" + req.body.college + "%'";
+  let gender = "'" + req.body.gender + "'";
+
+  // console.log('Variables initialised...');
+
+  let queryString = 'SELECT * FROM Members m, Department d WHERE'
+  + ' mname LIKE ' + name
+  + ' AND email LIKE ' + email
+  + ' AND d.dno=m.dno'
+  + ' AND dname LIKE ' + dname
+  + ' AND m.father_name LIKE ' + fatherName
+  + ' AND corresponding_address LIKE ' + correspondingAddress
+  + ' AND permanent_address LIKE ' + permanentAddress
+  + ' AND college LIKE ' + college
+  + ' AND gender=' + gender;
+
+  if(phone){
+    queryString = queryString + ' AND phone=' + phone;
+  }
+
+  queryString = queryString + ';';
+
+  // console.log('Query String...');
   console.log(queryString);
   con.query(queryString , (err, rows, fields) => {
-    console.log(JSON.stringify(rows));
-    console.log(rows[0].mname);
+    if (err) throw err;
+    // console.log(JSON.stringify(rows));
+    // console.log(rows[0].mname);
     res.send(JSON.stringify(rows));
   });
 });
