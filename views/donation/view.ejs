@@ -6,14 +6,38 @@
 
 <% include ../head.ejs %>
 
+<style>
+thead {
+  color: black;
+  background-color: white;
+}
+</style>
 
 <body id="body" style="background-image: url(/images/banner1.jpeg);">
   <% include ../nav_bar.ejs %>
   <!-- Contact Form -->
   <div class="item active" ng-app="donationApp" >
     <div class="container" ng-controller="donationController" >
+      <div class="item active" >
+        <div class="container">
+          <div class="col-sm-12 c-form-box wow fadeInUp">
+            <div class="c-form-top">
+              <div class="c-form-top-left">
 
-      <%# Please correct this%>
+      
+
+      
+
+          </div>
+        </div>
+        <div class="col-sm-offset-3">
+          <h3 data-wow-duration="1000ms"> <span class="color"> <b>Donations Table</b> </span> </h3>
+          <p>________________________________________</p>
+          <p>                                       .</p>
+        </div>
+
+
+        <%# Please correct this%>
       <div class="col-sm-2">
         <div class="form-group">
           <label>Donor Name:</label>
@@ -33,20 +57,7 @@
         </div>
       </div>
       <%# Till here%>
-
-      <div class="col-sm-9 col-sm-offset-1 c-form-box wow fadeInUp">
-        <div class="c-form-top">
-          <div class="c-form-top-left">
-
-          </div>
-        </div>
-        <div >
-          <h3 data-wow-duration="1000ms"> <span class="color"> <b>Donations Table</b> </span> </h3>
-          <p>________________________________________</p>
-          <p>                                       .</p>
-        </div>
-
-        <div class=""><table class="table table-bordered">
+        <div class="col-sm-10"><table class="table table-bordered">
           <thead>
             <th>Donor name</th>
             <th>Type</th>
