@@ -122,4 +122,11 @@ router.get('/view', (req, res) => {
   });
 });
 
+router.post('/view_data', (req, res) => {
+  con2.execute('SELECT * FROM Members WHERE mname LIKE ? and joining_date=?', [req.body.name, req.body.joiningDate], (err, rows, fields) => {
+    res.json(rows);
+    console.log("Data was sent...");
+  });
+});
+
 module.exports = router;

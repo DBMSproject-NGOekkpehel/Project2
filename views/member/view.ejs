@@ -34,47 +34,74 @@ thead {
       </div>
     </div>
   </div>
-  <div class=""><table class="table table-bordered">
-    <thead>
-      <th>Name</th>
-      <th>Joining Date</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Department</th>
-      <th>DOB</th>
-      <th>Father's name</th>
-      <th>Corresponding Address</th>
-      <th>Gender</th>
-      <th>College</th>
-    </thead>
-    <tbody>
-      <% for (m in members) { %>
-        <tr class="active">
-        <td><%= members[m].mname %></td>
-        <td><%= members[m].joining_date %></td>
-        <td><%= members[m].phone %></td>
-        <td><%= members[m].email %></td>
-        <td><%= members[m].dname %></td>
-        <td><%= members[m].date_of_birth %></td>
-        <td><%= members[m].father_name %></td>
-        <td><%= members[m].corresponding_address %></td>
-        <td><%= members[m].gender %></td>
-        <td><%= members[m].college %></td>
-        </tr>
-        <% } %>
-      </tbody>
-    </table>
-  </div>
-  <!-- Javascript -->
-  <script src="/javascripts/jquery-1.11.1.min.js"></script>
-  <script src="/javascripts/bootstrap.min.js"></script>
-  <script src="/javascripts/jquery.backstretch.min.js"></script>
-  <script src="/javascripts/wow.min.js"></script>
-  <%# <script src="public/js/scripts.js"></script>%>
+  <div class="" ng-app="memberView">
+    <div ng-controller="memberController">
+      <div class="col-sm-3">
+        <label>Name</label>
+        <input ng-model="name" ng-blur="ask()" />
+        Joining date:
+        <input ng-model="joiningDate" ng-blur="ask()" />
+        <button value="submit"></button>
+      </div>
+      <div class="col-sm-9">
+        <table class="table table-bordered">
+          <thead>
+            <th>Name</th>
+            <th>Joining Date</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>DOB</th>
+            <th>Father's name</th>
+            <th>Corresponding Address</th>
+            <th>Gender</th>
+            <th>College</th>
+          </thead>
+          <tbody>
+            <% for (m in members) { %>
+              <tr class="active">
+              <td><%= members[m].mname %></td>
+              <td><%= members[m].joining_date %></td>
+              <td><%= members[m].phone %></td>
+              <td><%= members[m].email %></td>
+              <td><%= members[m].dname %></td>
+              <td><%= members[m].date_of_birth %></td>
+              <td><%= members[m].father_name %></td>
+              <td><%= members[m].corresponding_address %></td>
+              <td><%= members[m].gender %></td>
+              <td><%= members[m].college %></td>
+              </tr>
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <!-- Javascript -->
+    <script src="/javascripts/jquery-1.11.1.min.js"></script>
+    <script src="/javascripts/bootstrap.min.js"></script>
+    <script src="/javascripts/jquery.backstretch.min.js"></script>
+    <script src="/javascripts/wow.min.js"></script>
+    <%# <script src="public/js/scripts.js"></script>%>
 
-  <!--[if lt IE 10]>
-  <script src="assets/js/placeholder.js"></script>
-  <![endif]-->
+    <script>
+    var memberView = angular.module("memberView", []);
 
-</body>
-</html>
+    memberView.controller("memberController", function($scope, $http) {
+
+      let vName = $scope.name;
+      let vJoiningDate = $scope.joiningDate;
+
+      let params = JSON.stringify({name: vName, joiningDate: vJoiningDate});
+      $http.post('/member/view_data', params ).success(function(data, status, headers, config) {
+        conssole.log(data);
+      });
+    });
+    </script>
+
+    <!--[if lt IE 10]>
+    <script src="assets/js/placeholder.js"></script>
+    <![endif]-->
+
+  </body>
+  </html>
